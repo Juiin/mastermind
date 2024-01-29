@@ -1,0 +1,30 @@
+.inputNumber{
+    width: 70px;
+    height: 70px;
+    font-size: 50px;
+    text-align: center;
+    width: 19%;
+    box-sizing: border-box;
+}
+
+.boardContainer{
+    width: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    
+    gap: 5px;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+}
+
+.solution{
+    width: 70px;
+    height: 70px;
+    font-size: 50px;
+    text-align: center;
+    width: 19%;
+    box-sizing: border-box;
+}
