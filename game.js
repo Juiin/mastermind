@@ -1,26 +1,58 @@
-solution = [1, 2, 3, 4];
+solution = ["1", "2", "3", "4"];
 currentRound = 0;
 maxAttempts = 10;
 
 numberElements = [];
-for (let xx = 0; xx < maxAttempts; xx++) {
-    numberElements[xx] = [];
-    for(let yy = 0; yy < 4; yy++){
-        numberElements[xx][yy] = document.getElementById("round" + xx + "Number" + yy);        
+for (let i = 0; i < maxAttempts; i++) {
+    numberElements[i] = [];
+    for(let j = 0; j < 4; j++){
+        numberElements[i][j] = document.getElementById("round" + i + "Number" + j);        
     }
 }
 
 confirmButtons = [];
+hitBlowIndicator = [];
 for(let i=0; i<maxAttempts; i++){
+    hitBlowIndicator[i] = document.getElementById("hitBlow" + i);
+
     confirmButtons[i] = document.getElementById("button" + i);
     confirmButtons[i].onclick = function(){
-        //If any of the current playable fields ar empty return out of event
+        //If any of the current playable fields ar empty return out of event or same as any other
         for(let i=0;i<4;i++){
-            if(numberElements[currentRound][i].value == ""){
-                return;
+            var currentRoundNumbersExeceptI = [];
+            for(let j=0;j<4;j++){
+                if(i==j){
+                    continue; 
+                } 
+                currentRoundNumbersExeceptI.push(numberElements[currentRound][j].value);
             }
+            if(numberElements[currentRound][i].value == "" || currentRoundNumbersExeceptI.includes(numberElements[currentRound][i].value)){
+                return;
+            } 
         }
         
+        //Display Hits&Blows
+        hitBlowIndicator[currentRound].style.display = "inline";
+        hits = 0;
+        blows = 0;
+        for(let j=0;j<4;j++){
+            if(numberElements[currentRound][j].value == solution[j]){
+                hits++;
+                continue;
+            }else{
+                if(solution.includes(numberElements[currentRound][j].value)){
+                    blows++;
+                }
+            }
+        }
+        //Draw HitsBlows
+        for(let i=0;i<hits;i++){
+            hitBlowIndicator[currentRound].innerHTML += "&#9673;"
+        }
+        for(let i=0;i<blows;i++){
+            hitBlowIndicator[currentRound].innerHTML += "&#x25CE;"
+        }
+
         currentRound++;
         newRound();
     }
@@ -43,6 +75,5 @@ function newRound(){
         numberElements[currentRound][i].removeAttribute("readonly")
     }
 }
-
 
 newRound();

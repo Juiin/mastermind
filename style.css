@@ -8,7 +8,7 @@
 }
 
 .boardContainer{
-    width: 400px;
+    width: 1550px;
     display: flex;
     flex-wrap: wrap;
     
@@ -32,4 +32,9 @@
 .confirmButton{
     width: 70px;
     visibility: hidden;
+}
+
+.hitBlowIndicator{
+    font-size: 50px;
+    display: inline;
 }
